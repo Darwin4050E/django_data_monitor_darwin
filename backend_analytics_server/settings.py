@@ -26,7 +26,13 @@ SECRET_KEY = "django-insecure-q5o!_&x&zrn2i&(59b+06p3j_jg3)0)*b_yrg=qj8)72xnda1c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = [
+  "https://*.app.github.dev", # Solo si utiliza Codespaces
+  "https://localhost:8000",
+  "http://127.0.0.1:8000"
+]
+
+ALLOWED_HOSTS = [ "*", ]
 
 
 # Application definition
@@ -118,4 +124,12 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, STATIC_URL),
+]
+
 API_URL = 'https://dleo10.pythonanywhere.com/landing/api/index/'
+# Fallo: acceso sin autenticación
+LOGIN_URL = '/login/'
+# Éxito: luego de autenticación exitosa
+LOGIN_REDIRECT_URL = '/dashboard/index'
